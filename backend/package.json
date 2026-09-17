@@ -1,0 +1,44 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "worker": "node src/startWorker.js"
+  },
+  "sequelize": {
+    "config": "src/config/config.json",
+    "models-path": "src/models",
+    "migrations-path": "src/migrations",
+    "seeders-path": "src/seeders"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@huggingface/inference": "^4.13.27",
+    "@pinecone-database/pinecone": "^8.2.0",
+    "bcrypt": "^6.0.0",
+    "bullmq": "^6.0.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "groq-sdk": "^1.5.0",
+    "ioredis": "^6.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.11.0",
+    "multer": "^2.2.0",
+    "mysql2": "^3.23.2",
+    "nodemailer": "^9.0.4",
+    "openai": "^6.49.0",
+    "pdf-parse": "^1.1.1",
+    "redis": "^6.1.0",
+    "sequelize": "^6.37.8"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
