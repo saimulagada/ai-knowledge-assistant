@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Chat from "./pages/Chat";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { Navigate } from "react-router-dom";
 
 
 function App() {
@@ -16,9 +17,9 @@ function App() {
       <Routes>
 
         <Route
-          path="/login"
-          element={<Login />}
-        />
+  path="/"
+  element={<Navigate to="/login" replace />}
+/>
         
         <Route
           path="/register"
