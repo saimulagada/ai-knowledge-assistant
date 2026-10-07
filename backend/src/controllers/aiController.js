@@ -48,8 +48,13 @@ const askAI = async (req, res) => {
       sources: answer.sources,
     });
   } catch (error) {
-    throw new AppError("Failed to generate answer", 502);
-  }
+  console.error("AI generation error:", error);
+  console.error("Message:", error.message);
+  console.error("Status:", error.status);
+  console.error("Details:", error.details);
+
+  throw new AppError("Failed to generate answer", 502);
+}
 };
 
 const getAIStats = async (req, res) => {
