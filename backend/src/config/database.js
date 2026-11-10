@@ -1,23 +1,37 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
-const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
-  {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialect: "mysql",
-    logging: false,
+const isProd = process.env.NODE_ENV === "production";
 
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
+const dbConfig = isProd
+  ? {
+      name: process.env.DB_NAME,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT,
+      dialectOptions: {
+        ssl: {
+          minVersion: "TLSv1.2",
+          rejectUnauthorized: true,
+        },
       },
-    },
-  }
-);
+    }
+  : {
+      name: process.env.LOCAL_DB_NAME,
+      user: process.env.LOCAL_DB_USER,
+      password: process.env.LOCAL_DB_PASSWORD,
+      host: process.env.LOCAL_DB_HOST,
+      port: process.env.LOCAL_DB_PORT,
+      dialectOptions: {},
+    };
+
+const sequelize = new Sequelize(dbConfig.name, dbConfig.user, dbConfig.password, {
+  host: dbConfig.host,
+  port: dbConfig.port,
+  dialect: "mysql",
+  logging: false,
+  dialectOptions: dbConfig.dialectOptions,
+});
 
 module.exports = sequelize;
